@@ -2,6 +2,8 @@
 
 A minimalist, serverless Single Page Application (SPA) designed to visualize MITRE’s Common Weakness Enumeration (CWE) list with a focus on official architectural diagrams.
 
+Available at: [vrls.ws/xkcwe](https://vrls.ws/xkcwe)
+
 
 <p align="center">
   <img src="xkcwe.png" alt="XKCWE Preview" width="600">
