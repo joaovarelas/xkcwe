@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
@@ -22,6 +22,17 @@
       --ink: #1a1a1a;
       --faint: #d4cfc6;
       --red: #c0392b;
+      --surface: #fff;
+      --panel-bg: #fff;
+    }
+
+    [data-theme="dark"] {
+      --paper: #1a1a2e;
+      --ink: #e8e0d0;
+      --faint: #2e2e4a;
+      --red: #ff6b6b;
+      --surface: #16213e;
+      --panel-bg: #0f3460;
     }
 
     html,
@@ -31,6 +42,7 @@
       color: var(--ink);
       font-family: 'Patrick Hand', cursive;
       font-size: 18px;
+      transition: background 0.35s, color 0.35s;
     }
 
     body {
@@ -47,6 +59,7 @@
     header {
       text-align: center;
       margin-bottom: 2.5rem;
+      position: relative;
     }
 
     .site-title {
@@ -64,6 +77,7 @@
       border-radius: 2px;
       margin-top: 4px;
       transform: rotate(-0.5deg);
+      transition: background 0.35s;
     }
 
     .site-subtitle {
@@ -71,6 +85,61 @@
       font-size: 0.88rem;
       opacity: 0.5;
       font-style: italic;
+    }
+
+    /* ── Lamp button ── */
+    .lamp-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      opacity: 0.75;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .lamp-btn:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .lamp-btn svg {
+      width: 38px;
+      height: 50px;
+      overflow: visible;
+    }
+
+    .lamp-label {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.58rem;
+      color: var(--ink);
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+      transition: color 0.35s;
+    }
+
+    /* SVG transitions */
+    .lamp-shade {
+      transition: fill 0.4s;
+    }
+
+    .lamp-bulb {
+      transition: fill 0.4s;
+    }
+
+    .lamp-glow {
+      transition: opacity 0.4s;
+    }
+
+    .lamp-cord,
+    .lamp-base {
+      transition: stroke 0.35s;
     }
 
     /* Search */
@@ -107,6 +176,7 @@
       font-size: 1rem;
       display: flex;
       align-items: center;
+      transition: background 0.35s, border-color 0.35s;
     }
 
     #cwe-input {
@@ -117,12 +187,14 @@
       padding: 0.6rem 0.8rem;
       font-family: 'Patrick Hand', cursive;
       font-size: 1.1rem;
-      background: #fff;
+      background: var(--surface);
+      color: var(--ink);
       outline: none;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
 
     #cwe-input:focus {
-      background: #fffef5;
+      background: var(--panel-bg);
     }
 
     #search-btn {
@@ -135,7 +207,7 @@
       color: var(--paper);
       cursor: pointer;
       box-shadow: 3px 3px 0 var(--ink);
-      transition: transform 0.1s, box-shadow 0.1s;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.35s, color 0.35s, border-color 0.35s;
       white-space: nowrap;
     }
 
@@ -176,24 +248,25 @@
       border: 2px solid var(--ink);
       border-radius: 3px 7px 4px 5px / 7px 3px 6px 2px;
       background: var(--paper);
+      color: var(--ink);
       cursor: pointer;
-      transition: background 0.1s;
+      transition: background 0.1s, color 0.35s, border-color 0.35s;
+    }
+
+    .chip:hover {
+      background: var(--faint);
     }
 
     .chip-dark {
       font-family: 'Patrick Hand', cursive;
       font-size: 0.8rem;
-      color: white;
+      color: var(--paper);
       padding: 0.15rem 0.6rem;
       border: 2px solid var(--ink);
       border-radius: 3px 7px 4px 5px / 7px 3px 6px 2px;
       background: var(--ink);
       cursor: pointer;
-      transition: background 0.1s;
-    }
-
-    .chip:hover {
-      background: var(--faint);
+      transition: background 0.35s, color 0.35s, border-color 0.35s;
     }
 
     /* Panel */
@@ -204,9 +277,10 @@
     .panel {
       border: 3px solid var(--ink);
       border-radius: 3px 9px 5px 7px / 7px 3px 9px 5px;
-      background: #fff;
+      background: var(--surface);
       overflow: hidden;
       box-shadow: 5px 5px 0 var(--ink);
+      transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
     }
 
     .panel-caption {
@@ -217,6 +291,7 @@
       align-items: baseline;
       gap: 1rem;
       flex-wrap: wrap;
+      transition: background 0.35s, color 0.35s;
     }
 
     .cwe-id {
@@ -233,12 +308,13 @@
 
     .panel-image {
       border-bottom: 3px solid var(--ink);
-      background: #fff;
+      background: var(--panel-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 200px;
       padding: 1.2rem;
+      transition: background 0.35s, border-color 0.35s;
     }
 
     .panel-image img {
@@ -247,6 +323,11 @@
       object-fit: contain;
       display: block;
       filter: contrast(1.05) saturate(0.55);
+      transition: filter 0.35s;
+    }
+
+    [data-theme="dark"] .panel-image img {
+      filter: contrast(0.85) saturate(0.3) invert(0.9) hue-rotate(180deg);
     }
 
     .no-img-wrap {
@@ -294,6 +375,7 @@
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
+      transition: border-color 0.35s;
     }
 
     .panel-alt .meta-right {
@@ -311,6 +393,11 @@
       color: var(--red);
       box-shadow: 3px 3px 0 var(--red);
       animation: popIn 0.3s ease both;
+      transition: background 0.35s;
+    }
+
+    [data-theme="dark"] #error-msg {
+      background: #2a1010;
     }
 
     /* Loader */
@@ -372,61 +459,6 @@
   </style>
 
 
-  <script>
-    let cweData = [];
-
-
-    /**
-    * Gets a random CWE from the filtered list
-    */
-    function getRandomCWE() {
-      if (cweData.length === 0) return "";
-
-      const randomIndex = Math.floor(Math.random() * cweData.length);
-      // Return ONLY the ID (e.g., "770") so lookup() can handle it
-      return String(cweData[randomIndex].ID);
-    }
-
-
-    /**
-     * Loads and filters CWE data once on page load
-     */
-    async function loadCWEData() {
-      const url = "https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/refs/heads/main/json_repo/cwe.json";
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch");
-
-        const data = await response.json();
-
-        // Target the "Weaknesses" array specifically
-        const allWeaknesses = data.Weaknesses || [];
-
-        // Filter: Only keep objects that have the "Diagram" property
-        cweData = allWeaknesses.filter(cwe =>
-          cwe.Diagram && typeof cwe.Diagram === 'string'
-        );
-
-        console.log(`Filter complete. Total CWEs with Diagrams: ${cweData.length}`);
-
-        if (cweData.length > 0) {
-          lookup(getRandomCWE());
-        }
-
-
-      } catch (error) {
-        console.error("Error loading CWE data:", error);
-      }
-    }
-
-
-
-    // Initialize when the page loads
-    window.addEventListener('DOMContentLoaded', loadCWEData);
-
-
-  </script>
 </head>
 
 <body>
@@ -435,6 +467,35 @@
     <header>
       <div class="site-title">xkcwe</div>
       <p class="site-subtitle">(because security is serious, but the diagrams don't have to be)</p>
+
+      <!-- Lamp toggle button -->
+      <button class="lamp-btn" id="lamp-btn" onclick="toggleTheme()" title="Toggle dark mode"
+        aria-label="Toggle dark mode">
+        <svg id="lamp-svg" viewBox="-2 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- hanging cord -->
+          <line class="lamp-cord" x1="18" y1="0" x2="18" y2="8" stroke="#1a1a1a" stroke-width="2.2"
+            stroke-linecap="round" />
+          <!-- lamp shade (trapezoid) -->
+          <path class="lamp-shade" id="lamp-shade" d="M5 24 L11 10 L25 10 L31 24 Z" fill="#e8c547" stroke="#1a1a1a"
+            stroke-width="2.2" stroke-linejoin="round" />
+          <!-- shade rim -->
+          <line x1="5" y1="24" x2="31" y2="24" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" />
+          <!-- bulb body -->
+          <ellipse class="lamp-bulb" id="lamp-bulb" cx="18" cy="28" rx="5" ry="5.5" fill="#fff9c4" stroke="#1a1a1a"
+            stroke-width="1.8" />
+          <!-- bulb base/socket -->
+          <rect x="15.5" y="32.5" width="5" height="2.5" rx="1" fill="#999" stroke="#1a1a1a" stroke-width="1.5" />
+          <!-- glow rays — shown in dark mode (lamp ON) -->
+          <g class="lamp-glow" id="lamp-glow" opacity="0">
+            <line x1="18" y1="36" x2="18" y2="43" stroke="#f0d060" stroke-width="2" stroke-linecap="round" />
+            <line x1="12" y1="34" x2="8" y2="40" stroke="#f0d060" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="24" y1="34" x2="28" y2="40" stroke="#f0d060" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="9" y1="27" x2="3" y2="26" stroke="#f0d060" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="27" y1="27" x2="33" y2="26" stroke="#f0d060" stroke-width="1.6" stroke-linecap="round" />
+          </g>
+        </svg>
+        <span class="lamp-label" id="lamp-label">dark mode</span>
+      </button>
     </header>
 
     <div class="search-area">
@@ -456,7 +517,6 @@
         <button class="chip" onclick="lookup('347')">347 Bad Sig</button>
         <button class="chip" onclick="lookup('502')">502 Deserialisation</button>
         <button class="chip" onclick="lookup('798')">798 Hardcoded Creds</button>
-
         <button class="chip-dark" onclick="lookup(getRandomCWE())">RANDOM</button>
       </div>
     </div>
@@ -467,56 +527,101 @@
     <div id="error-msg"></div>
     <div id="result"></div>
 
+    <footer style="text-align:center; margin-top:3rem; font-size:0.78rem; font-style:italic; opacity:0.45;">
+      powered by the <a href="https://github.com/CWE-CAPEC/REST-API-wg" target="_blank" rel="noopener"
+        style="color:var(--ink); text-decoration:underline; text-underline-offset:3px;">MITRE CWE Program</a>
+    </footer>
+
+
+
   </main>
+
   <script>
+
+    let cweData = [];
+
+    function getRandomCWE() {
+      if (cweData.length === 0) return "";
+      return String(cweData[Math.floor(Math.random() * cweData.length)].ID);
+    }
+
+    async function loadCWEData() {
+      const url = "https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/refs/heads/main/json_repo/cwe.json";
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch");
+        const data = await response.json();
+        cweData = (data.Weaknesses || []).filter(cwe => cwe.Diagram && typeof cwe.Diagram === 'string');
+        console.log(`Filter complete. Total CWEs with Diagrams: ${cweData.length}`);
+        if (cweData.length > 0) lookup(getRandomCWE());
+      } catch (error) {
+        console.error("Error loading CWE data:", error);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadCWEData);
+
     const input = document.getElementById('cwe-input');
     const btn = document.getElementById('search-btn');
     const result = document.getElementById('result');
     const errEl = document.getElementById('error-msg');
     const loader = document.getElementById('loader');
 
-    // Event Listeners
     btn.addEventListener('click', () => lookup(input.value.trim()));
     input.addEventListener('keydown', e => { if (e.key === 'Enter') lookup(input.value.trim()); });
 
-    /**
-     * Client-side Lookup: Searches the locally loaded cweData array
-     */
-    async function lookup(id) {
-      // Clean the ID input
-      id = id.toString().replace(/^cwe-?/i, '').trim();
+    /* ── Theme toggle ── */
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      updateLamp(!isDark);
+    }
 
+    function updateLamp(isDark) {
+      const glow = document.getElementById('lamp-glow');
+      const shade = document.getElementById('lamp-shade');
+      const bulb = document.getElementById('lamp-bulb');
+      const label = document.getElementById('lamp-label');
+
+      if (isDark) {
+        // lamp is ON — glowing yellow shade, bright bulb, rays visible
+        glow.style.opacity = '1';
+        shade.style.fill = '#e8c547';
+        bulb.style.fill = '#ffee88';
+        label.textContent = 'light mode';
+      } else {
+        // lamp is OFF — dim shade, pale bulb, no rays
+        glow.style.opacity = '0';
+        shade.style.fill = '#e8c547';
+        bulb.style.fill = '#fff9c4';
+        label.textContent = 'dark mode';
+      }
+    }
+
+    /* ── Lookup ── */
+    async function lookup(id) {
+      id = id.toString().replace(/^cwe-?/i, '').trim();
       if (!id || !/^\d+$/.test(id)) {
         showError("that's not a number. numbers are the things with curves and lines.");
         return;
       }
-
       input.value = id;
       setLoading(true);
-
-      // Artificial "drawing" delay for vibes (optional, remove if you want it instant)
       await new Promise(r => setTimeout(r, 400));
-
-      // Search the locally loaded array instead of a backend API
-      // Note: The GitHub JSON uses "ID" as a string, e.g., "79"
       const found = cweData.find(item => item.ID === id);
-
       if (found) {
-        // Map the GitHub JSON fields to what your render function expects
-        const formattedData = {
+        render({
           id: found.ID,
           name: found.Name,
           description: found.Description || "No description provided.",
           abstraction: found.Abstraction || "N/A",
           status: found.Status || "N/A",
-          // Construct the Mitre image URL directly
           image_url: found.Diagram ? `https://cwe.mitre.org${found.Diagram}` : null
-        };
-        render(formattedData);
+        });
       } else {
         showError(`CWE-${id} not found in the local database. It might not have a diagram or doesn't exist.`);
       }
-
       setLoading(false);
     }
 
@@ -532,12 +637,12 @@
     function noImgHTML() {
       return '<div class="no-img-wrap">' +
         '<svg class="no-img-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">' +
-        '<circle cx="50" cy="18" r="10" stroke="#1a1a1a" stroke-width="3" fill="none"/>' +
-        '<line x1="50" y1="28" x2="50" y2="70" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>' +
-        '<line x1="50" y1="42" x2="25" y2="58" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>' +
-        '<line x1="50" y1="42" x2="75" y2="58" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>' +
-        '<line x1="50" y1="70" x2="32" y2="95" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>' +
-        '<line x1="50" y1="70" x2="68" y2="95" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>' +
+        '<circle cx="50" cy="18" r="10" stroke="currentColor" stroke-width="3" fill="none"/>' +
+        '<line x1="50" y1="28" x2="50" y2="70" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+        '<line x1="50" y1="42" x2="25" y2="58" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+        '<line x1="50" y1="42" x2="75" y2="58" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+        '<line x1="50" y1="70" x2="32" y2="95" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+        '<line x1="50" y1="70" x2="68" y2="95" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
         '</svg>' +
         '<p class="no-img-caption">no diagram available<br/>(the committee forgot to draw one)</p>' +
         '</div>';
@@ -577,8 +682,6 @@
       btn.disabled = on;
       if (on) { result.innerHTML = ''; errEl.style.display = 'none'; }
     }
-
-
   </script>
 </body>
 

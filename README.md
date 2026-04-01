@@ -25,5 +25,9 @@ Since this is a single-file SPA, deployment is instant:
 * **Styling:** CSS3 Custom Variables & Keyframes
 * **Data Source:** [MITRE CWE REST-API JSON](https://github.com/CWE-CAPEC/REST-API-wg)
 
----
+
 *Created for security researchers who prefer boxes and arrows over walls of text.*
+
+---
+
+*Powered by the [MITRE CWE Program](https://github.com/CWE-CAPEC/REST-API-wg)*
